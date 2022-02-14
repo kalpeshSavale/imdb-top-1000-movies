@@ -7,26 +7,38 @@ Acknowledgements
 The data in this dataset has been scraped using Python BeautifulSoup from the publicly available website https://www.imdb.com.
 
 * imopritng useful libraries:
+  
+* call url using get func:
+
+
+* call html parser
+
+* formate the html content using:
+
+#all conatint in h3 tag where class name is lister-item-header
+
+# Creating a loop for all 100 pages:
+
+
+* creating loop for each page where data want to extract:
+
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-* call url using get func:
 response=requests.get("https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating").text
 
-* call html parser
 soup=BeautifulSoup(response,'lxml')
 
-* formate the html content using:
 print(soup.prettify())
 
-#all conatint in h3 tag where class name is lister-item-header
-soup.find_all('h3')[0]
+for i in soup.find_all('h3'):
+    print(i.text.strip())
+    
+info =soup.find_all('div',class_='lister-item-content') #searching on whole description box and save into info.
 
-# Creating a loop for all 100 pages:
-final=pd.DataFrame()
-
-* creating loop for each page where data want to extract:
+len(info)
 
 for j in range(1,100):
     url ='https://www.imdb.com/search/title/?groups=top_1000&sort=user_rating,desc&count=100&start=201&ref_={}'.format(j)
