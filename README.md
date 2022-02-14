@@ -89,19 +89,19 @@ The data in this dataset has been scraped using Python BeautifulSoup from the pu
               
               Movie_Name.append(i.find('a').text.strip())
   
-  #print(i.find('span',class_="lister-item-year text-muted unbold").text)
+              #print(i.find('span',class_="lister-item-year text-muted unbold").text)
              
              Year.append(i.find('span',class_="lister-item-year text-muted unbold").text.strip())
    
-   #print(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
+             #print(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
               
              Rating.append(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
    
-   #print(i.find('span',class_='genre').text.strip())
+             #print(i.find('span',class_='genre').text.strip())
              
              genre.append(i.find('span',class_='genre').text.strip())
 
-#creating dataframe:
+             #creating dataframe:
           
           d={'Movie_Name':Movie_Name, 'Year':Year, 'Rating':Rating, 'genre':genre }
           df=pd.DataFrame(d)
