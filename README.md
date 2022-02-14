@@ -73,6 +73,9 @@ The data in this dataset has been scraped using Python BeautifulSoup from the pu
       
 # creating same loop for all 100 pages and store in list we created:
       
+     # Creating a loop for all 100 pages:
+      final=pd.DataFrame()
+
       for j in range(1,100):
           url ='https://www.imdb.com/search/title/?groups=top_1000&sort=user_rating,desc&count=100&start=201&ref_={}'.format(j)
           response=requests.get("https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating").text
@@ -84,25 +87,16 @@ The data in this dataset has been scraped using Python BeautifulSoup from the pu
           Rating=[]
           genre=[]
           for i in info:
-  
-  #print(i.find('a').text.strip()) # print what do you want
-              
+              #print(i.find('a').text.strip()) # print what do you want
               Movie_Name.append(i.find('a').text.strip())
-  
               #print(i.find('span',class_="lister-item-year text-muted unbold").text)
-             
-             Year.append(i.find('span',class_="lister-item-year text-muted unbold").text.strip())
-   
-             #print(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
-              
-             Rating.append(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
-   
-             #print(i.find('span',class_='genre').text.strip())
-             
-             genre.append(i.find('span',class_='genre').text.strip())
+              Year.append(i.find('span',class_="lister-item-year text-muted unbold").text.strip())
+              #print(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
+              Rating.append(i.find('div',class_="inline-block ratings-imdb-rating").text.strip())
+              #print(i.find('span',class_='genre').text.strip())
+              genre.append(i.find('span',class_='genre').text.strip())
 
-             #creating dataframe:
-          
+          #creating dataframe:
           d={'Movie_Name':Movie_Name, 'Year':Year, 'Rating':Rating, 'genre':genre }
           df=pd.DataFrame(d)
           final=final.append(df,ignore_index=True)
